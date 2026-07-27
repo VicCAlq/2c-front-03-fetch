@@ -65,3 +65,40 @@ Atenção aos detalhes abaixo:
 9. Clique no botão "Commit & push" e espere um pouco. Após o botão ficar desabilitado, a atividade foi enviada.  
 ![Botão de commit](./assets/readme/commit-04.png)  
 
+
+============= * E-INTER ===================
+
+COD - JUDEU
+WILD RIFT - MATEUS
+LOL - MATEUS
+VALORANT - DAVI
+CLASH - TORNEIO
+BRAWl - THULIO
+EFOOT - SLA
+FREE FIRE - PEDRO
+
+================ * QUADRA =================
+
+= WOMAN - ALL LET =
+
+* VOLEI
+* BASQUETE
+* FUTSAL
+
+= MASCULINO =
+
+VOLEI - BRUNO
+BASQUETE - PRIMO
+FUTSAL - MIGUEL
+
+QUEIMADO - RYAN/LET
+
+=============== OUTROS ===================
+
+CABO - MEXICANO
+PINGPONG - ABNER
+* XADREZ - CAUE
+DOMINO - NERES/MATEUS
+* BOLINHA DE GUDE - PRIMO
+* JUSTDANCE - KAMYLLE (OU CLASH)
+
