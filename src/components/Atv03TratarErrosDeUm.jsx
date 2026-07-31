@@ -27,3 +27,95 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import { useState } from "react";
+
+const estilo = {
+  container: {
+    backgroundColor: "rgb(138, 214, 24)",
+    padding: "10px",
+    borderRadius: "10px",
+    margin: "20px",
+  },
+
+  botao: {
+    borderRadius: "5px",
+    backgroundColor: "rgb(138, 214, 24)",
+    padding: "10px",
+    margin: "10px",
+    width: "500px",
+    cursor: "pointer",
+  },
+
+  textoBotao: {
+    color: "#eee",
+    fontSize: "16px",
+    margin: 0,
+  },
+
+  resultado: {
+    margin: "10px",
+    padding: "10px",
+    backgroundColor: "rgb(69, 107, 11)",
+    borderRadius: "5px",
+  },
+
+  titulo: {
+    fontWeight: "bold",
+    fontSize: "18px",
+  },
+
+  texto: {
+    margin: "8px 0",
+  },
+};
+
+export default function Atv03TratarErrosDeUm() {
+  const [comentario, setComentario] = useState(null)
+
+  function carregarComentario() {
+    fetch("https://jsonplaceholder.typicode.com/comments/20")
+    .then((response) => {
+      if (!response.ok){
+        throw new Error(
+                    `Erro na requisição! Status: ${response.status}`
+        );
+      }
+
+      return response.json();
+    })
+    .then((dados) => {
+      setComentario(dados);
+    })
+    .catch((erro) => {
+      console.log("Erro:", erro);
+    })
+  }
+
+
+  return (<>
+    <div style={estilo.container}>
+        <button style={estilo.botao} onClick={carregarComentario}>
+            <p style={estilo.textoBotao}>
+                Clique abaixo para carregar uma atividade
+            </p>
+        </button>
+
+        {comentario && (
+            <div style={estilo.resultado}>
+                <p style={estilo.titulo}>
+                    {comentario.postId}: {comentario.id} - {comentario.email}
+                </p>
+
+                <p style={estilo.texto}>
+                    {comentario.name}
+                </p>
+
+                <p style={estilo.texto}>
+                    {comentario.body}
+                </p>
+            </div>
+        )}
+    </div>
+</>);
+}
