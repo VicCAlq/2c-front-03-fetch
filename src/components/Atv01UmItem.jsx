@@ -22,3 +22,22 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+
+export default function Atv01Item() {
+  return (
+    <div>
+      <button onClick={handleClick}>Clique abaixo para carregar uma atividade</button>
+      <p id="activity"></p>
+    </div>
+  );
+
+  function handleClick() {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(data => {
+        const status = data.completed ? 'feito' : 'a fazer';
+        document.getElementById('activity').textContent = `${data.id} - ${data.title}: ${status}`;
+      })
+      .catch(error => console.error('Erro ao carregar a atividade:', error));
+  }
+}
