@@ -23,3 +23,39 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+
+
+
+  const [resultado, setResultado] = useState(<p>Clique abaixo para carregar várias atividades</p>)
+
+
+  async function carregarLista() {
+   
+    await fetch(
+     'https://jsonplaceholder.typicode.com/todos',
+      { method: 'GET', }
+    ).then((resposta) => {
+      if (!resposta.ok) {
+        throw new Error(`Erro na requisição! Status: ${resposta.status}`);
+      }
+      return resposta.json()
+    })
+    
+    .then((resultado) => {
+      console.log(resultado)
+      const listaDeUsuarios = 
+      <div>
+        {resultado.map((numero) => {
+          return <div style={{
+            margin: "10px", padding: "5px", backgroundColor: "#7ab", borderRadius: "5px",
+          }}>
+            <p>userId: {numero.inteiro}</p>
+            <p>id: {numero.inteiro}</p>
+            <p>title: {texto}</p>
+
+          </div>
+        })}
+      </div>
+
+      })
+    }
