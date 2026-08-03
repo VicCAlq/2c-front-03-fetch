@@ -33,11 +33,13 @@ import { useState } from "react";
 export default function Atv04TratarErrosDeMuitos() {
   const [comentarios, setComentarios] = useState([]);
 
-  function carregarComentarios() {
-    fetch("https://jsonplaceholder.typicode.com/comments")
+  async function carregarComentarios() {
+    await fetch("https://jsonplaceholder.typicode.com/comments",
+      {method : "GET"}
+    )
       .then((resposta) => {
         if (!resposta.ok) {
-          throw new Error("Erro na requisição");
+          throw new Error(`Erro na requisição! Status: ${resposta.status}`);
         }
 
         return resposta.json();
@@ -72,3 +74,4 @@ export default function Atv04TratarErrosDeMuitos() {
     </div>
   );
 }
+
