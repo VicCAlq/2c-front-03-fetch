@@ -27,3 +27,42 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import { useState } from 'react'
+
+export default function Atv03TratarErrosDeUm() {
+  const [resultado, setResultado] = useState(<p>Os dados da atividade aparecerão aqui.</p>)
+
+  async function carregarAtividade() {
+    await fetch('https://jsonplaceholder.typicode.com/comments/20', { method: 'GET' })
+      .then((resposta) => {
+        if (!resposta.ok) {
+          throw new Error(`Erro na requisição! Status: ${resposta.status}`)
+        }
+        return resposta.json()
+      })
+      .then((dados) => {
+        setResultado(
+          <div>
+            <p>{dados.postId}: {dados.id} - {dados.email}</p>
+            <p>{dados.name}</p>
+            <p>{dados.body}</p>
+          </div>
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+        setResultado(<p>Erro ao carregar a atividade.</p>)
+      })
+  }
+
+  return (
+    <div>
+      <button onClick={() => carregarAtividade()}>
+        Clique abaixo para carregar uma atividade
+      </button>
+      {resultado}
+    </div>
+  )
+}
+
