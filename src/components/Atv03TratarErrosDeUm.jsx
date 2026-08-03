@@ -27,3 +27,46 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import { useState } from 'react'
+
+export default function Atv03TratarErrosDeUm() {
+  const [resultado, setResultado] = useState(<p>Os dados do comentário aparecerão no lugar deste texto</p>)
+
+  async function carregarComentario() {
+    await fetch(
+      'https://jsonplaceholder.typicode.com/comments/20',
+      { method: 'GET', }
+    )
+    .then((resposta) => {
+      if (!resposta.ok) {
+        throw new Error('Erro na requisição: ' + resposta.status)
+      }
+      return resposta.json()
+    })
+    .then((resultado) => {
+      console.log(resultado)
+      
+      const comentario = <div>
+        <p>{resultado.postId}: {resultado.id} - {resultado.email}</p>
+        <p>{resultado.name}</p>
+        <p>{resultado.body}</p>
+      </div>
+
+      setResultado(comentario)
+    })
+    .catch((erro) => {
+      console.error(erro)
+      setResultado(<p>Ocorreu um erro ao carregar o comentário: {erro.message}</p>)
+    })
+  }
+
+  return(
+    <div>
+      <button onClick={() => carregarComentario()}>
+        Clique abaixo para carregar um comentário
+      </button>
+      {resultado}
+    </div>
+  )
+}
