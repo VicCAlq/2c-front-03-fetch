@@ -27,3 +27,51 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+import {useState} from "react"
+
+
+export default function Atv03TratarErrosDeUm (){
+  export default function Atv04TratarErrosMuitos(){
+
+  const [ itens,setItens] = useState(<p>comentarios</p>)
+
+    async function Comentarios () {
+      await fetch(
+        'https://jsonplaceholder.typicode.com/comments/20',
+        {method: "GET"} 
+          )
+          .then((resposta) = {
+            if(resposta.ok == true) {
+              throw new Error(`erro na requisição!Status: ${resposta.status}`);
+            }
+            return resposta.json()
+          })
+          .then((resultado) = {
+            setItens(<divstyle= {{display:flex, flexDirectiom:"column", gap: 10px}}>
+            {resultado(comentarios) = {
+              return <div style={{
+                backgroundColor: "#abba44",
+                padding: "10px",
+                width: "500px",
+                margin: "10px auto",
+              }}>
+              <p>[comentario.postId]: [comentario.id] - [comentario.email]</p>
+              <p>[comentario.name]</p>
+              <p>[comentario.body]</p>
+
+              </div>
+            }}  
+              </div>)
+          })
+          .catch((erro)={
+            window.alert(erro)
+          })    
+    }
+    return(<div>
+      <button
+      onClick = { () = carregarComentarios()}
+    >Clique abaixo para carregar uma atividade</button>
+    {itens}
+    </div>)
+}
+  
