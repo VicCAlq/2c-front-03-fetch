@@ -22,3 +22,37 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+
+import { useState } from 'react'
+
+
+export default function Atv01UmItem() {
+  const [resultado, setResultado] = useState(<p>info</p>)
+  async function requisicao() {
+    await fetch('https://jsonplaceholder.typicode.com/todos/1',
+      { method: 'get', }
+    )
+      .then((resposta) => {
+        console.log(resposta)
+        return resposta.json()
+      })
+      .then((resultado) => {
+
+        console.log(resultado)
+
+        const usuario = <p>{resultado.userId} - {resultado.title}: {resultado.completed ? 'feito' : 'a fazer'}</p>
+
+
+        // Jogamos o valor da lista de itens a serem exibidos para
+        // a variável de estado "resultado"
+        setResultado(usuario)
+      })
+  }
+
+  return (
+    <div>
+      <button onClick={() => requisicao()}>Clique abaixo para carregar</button>
+      <p>{resultado}</p>
+    </div>
+  )
+}
