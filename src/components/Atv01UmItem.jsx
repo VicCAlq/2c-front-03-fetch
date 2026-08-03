@@ -30,10 +30,11 @@ export default function Atv01UmItem() {
 
 	const carregarAtividade = async () => {
 		await fetch(
-			"https://jsonplaceholder.typicode.com/todos/4",
+			"https://jsonplaceholder.typicode.com/todos/1",
 			{ method: "GET" }
 		).then((resposta) => {
-			if (resposta.ok) return resposta.json()
+			if (resposta.ok) 
+				return resposta.json()
 		}).then((resultado) => {
 			defItem(<p>{ resultado.id } - { resultado.title }: { resultado.completed.toString() }</p>)
 		})
