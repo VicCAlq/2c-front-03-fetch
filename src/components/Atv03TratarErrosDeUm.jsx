@@ -28,10 +28,38 @@
 * do texto dentro deles.
 */
 
+import { useState } from 'react'
+
 export default function Atv03TratarErrosDeUm() {
+	const [item, defItem] = useState(<div>Nada carregado, ainda.</div>)
+
+	const carregarComentario = async () => {
+		await fetch(
+			"https://jsonplaceholder.typicode.com/comments/20",
+			{ method: "GET" }
+		).then((resposta) => {
+			if (!resposta.ok)
+				throw new Error(`Ocorreu um erro na requisição. Status: ${resposta.statusText}`)
+
+			return resposta.json()
+		}).then((resultado) => {
+			const { postId, id, name, email, body } = resultado
+			defItem((
+				<div>
+					<p>{ postId }: { id } - { email }</p>
+					<p>{ name }</p>
+					<p>{ body }</p>
+				</div>
+			))
+		}).catch((erro) => {
+			window.alert(erro.message)
+		})
+	}
+
 	return (
 		<div>
-			<button></button>
+			<button onClick={ () => carregarComentario() }>Clique abaixo para carregar uma atividade</button>
+			{ item }
 		</div>
 	)
 }

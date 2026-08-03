@@ -34,7 +34,7 @@ const estilos = {
 }
 
 export default function Atv02MuitosItens() {
-	const [itens, defItens] = useState(<ul></ul>)
+	const [itens, defItens] = useState(<ul>Nada foi carregado.</ul>)
 
 	const carregarAtividades = async () => {
 		await fetch(
@@ -45,7 +45,7 @@ export default function Atv02MuitosItens() {
 				return resposta.json()
 		}).then((resultado) => {
 			defItens(<ul style={ estilos.itens }>
-				{ resultado.map(dado => <li key={ dado.id }>{dado.id} - {dado.title}: {dado.completed.toString()}</li>) }
+				{ resultado.map(dado => <li key={ dado.id }><p>{dado.id} - {dado.title}: {dado.completed.toString()}</p></li>) }
 			</ul>)
 		})
 	}
