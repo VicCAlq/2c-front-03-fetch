@@ -28,3 +28,77 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+
+
+import { useState } from 'react'
+
+export default function Atv04TratarErrosDeMuitos() {
+  const [itens, setItens] = useState('As informações irao aparecer aqui')
+
+  const styles = {
+    container: {
+      maxWidth: '600px',
+      margin: '40px auto',
+      padding: '24px',
+      fontFamily: 'Arial, sans-serif',
+    },
+    button: {
+      display: 'block',
+      margin: '0 auto 20px',
+      padding: '10px 20px',
+      fontSize: '16px',
+      backgroundColor: '#000f2e',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '6px',
+      cursor: 'pointer',
+    },
+    lista: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '12px',
+    },
+    item: {
+      border: '1px solid #4e4949',
+      borderRadius: '6px',
+      padding: '12px 16px',
+      backgroundColor: '#f9fafb',
+    },
+  }
+
+  function carregarComentarios() {
+    fetch("https://jsonplaceholder.typicode.com/comments", { method: "GET" })
+      .then((resposta) => {
+        if (!resposta.ok) {
+          throw new Error(`Erro na requisição! Status: ${resposta.status}`)
+        }
+        return resposta.json()
+      })
+      .then((resultado) => {
+        setItens(
+          resultado.map((item) => (
+            <div key={item.id} style={styles.item}>
+              <p>{item.postId}: {item.id} - {item.email}</p>
+              <p>{item.name}</p>
+              <p>{item.body}</p>
+            </div>
+          ))
+        )
+      })
+      .catch((erro) => {
+        console.error(erro)
+      })
+  }
+
+  return (
+    <div style={styles.container}>
+      <button style={styles.button} onClick={() => carregarComentarios()}>
+        Clique abaixo para carregar
+      </button>
+      <div style={styles.lista}>
+        {itens}
+      </div>
+    </div>
+  )
+}
