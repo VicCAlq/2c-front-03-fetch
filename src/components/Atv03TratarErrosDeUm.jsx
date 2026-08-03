@@ -39,7 +39,7 @@ export default function Atv03TratarErrosDeUm() {
 			{ method: "GET" }
 		).then((resposta) => {
 			if (!resposta.ok)
-				throw new Error(`Ocorreu um erro na requisição. Status: ${resposta.statusText}`)
+				throw new Error(`Ocorreu um erro na requisição. ${resposta.status}: ${resposta.statusText}`)
 
 			return resposta.json()
 		}).then((resultado) => {
@@ -58,7 +58,7 @@ export default function Atv03TratarErrosDeUm() {
 
 	return (
 		<div>
-			<button onClick={ () => carregarComentario() }>Clique abaixo para carregar uma atividade</button>
+			<button onClick={ () => carregarComentario() }>Clique abaixo para carregar um comentário</button>
 			{ item }
 		</div>
 	)

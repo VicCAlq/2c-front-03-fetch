@@ -29,10 +29,51 @@
 * do texto dentro deles.
 */
 
+import { useState } from 'react'
+
+const estilos = {
+	itens: {
+		height: "150px",
+		overflowY: "auto"
+	}
+}
+
 export default function Atv04TratarErrosDeMuitos() {
+	const [itens, defItens] = useState(<ul>Nada para ver aqui, por enquanto.</ul>)
+
+	const carregarComentarios = async () => {
+		await fetch(
+			"https://jsonplaceholder.typicode.com/comments",
+			{ method: "GET" }
+		).then((resposta) => {
+			if (!resposta.ok)
+				throw new Error(`Ocorreu um erro durante a requisição. ${resposta.status}: ${resposta.statusText}`)
+
+			return resposta.json()
+		}).then((resultado) => {
+			const cadaItem = (dado) => {
+				const { postId, id, name, email, body } = dado
+				return (
+					<li key={ id }>
+						<div>
+							<p>{ postId }: { id } - { email }</p>
+							<p>{ name }</p>
+							<p>{ body }</p>
+						</div>
+					</li>
+				)
+			}
+
+			defItens(<ul style={ estilos.itens }>{ resultado.map(cadaItem) }</ul>)
+		}).catch((erro) => {
+			window.alert(erro.message)
+		})
+	}
+
 	return (
 		<div>
-			<button></button>
+			<button onClick={ () => carregarComentarios() }>Clique abaixo para carregar vários comentários</button>
+			{ itens }
 		</div>
 	)
 }
