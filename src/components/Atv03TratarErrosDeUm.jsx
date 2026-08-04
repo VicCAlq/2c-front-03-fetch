@@ -27,3 +27,49 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+import { useState } from "react";
+
+function Atv03TratarErrosDeUm() {
+  const [comentario, setComentario] = useState(null);
+  const [erro, setErro] = useState("");
+
+  const carregarComentario = () => {
+    setErro("");
+
+    fetch("https://jsonplaceholder.typicode.com/comments/20")
+      .then((resposta) => {
+        if (!resposta.ok) {
+          throw new Error("Erro na requisição.");
+        }
+        return resposta.json();
+      })
+      .then((dados) => {
+        setComentario(dados);
+      })
+      .catch((erro) => {
+        setErro(erro.message);
+      });
+  };
+
+  return (
+    <div>
+      <button onClick={carregarComentario}>
+        Clique abaixo para carregar uma atividade
+      </button>
+
+      {erro && <p>{erro}</p>}
+
+      {comentario && (
+        <div>
+          <p>
+            {comentario.postId}: {comentario.id} - {comentario.email}
+          </p>
+          <p>{comentario.name}</p>
+          <p>{comentario.body}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Atv03TratarErrosDeUm;
