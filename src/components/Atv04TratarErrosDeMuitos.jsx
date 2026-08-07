@@ -28,3 +28,98 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+import { useState } from "react";
+
+const estilo = {
+  container: {
+    backgroundColor: "rgb(236, 73, 223)",
+    padding: "10px",
+    borderRadius: "10px",
+    margin: "20px",
+  },
+
+  botao: {
+    borderRadius: "5px",
+    backgroundColor: "rgb(236, 73, 223)",
+    padding: "10px",
+    margin: "10px",
+    width: "500px",
+    cursor: "pointer",
+  },
+
+  textoBotao: {
+    color: "#eee",
+    fontSize: "16px",
+    margin: 0,
+  },
+
+  resultado: {
+    margin: "10px",
+    padding: "10px",
+    backgroundColor: "rgb(210, 28, 195)",
+    borderRadius: "5px",
+  },
+
+  titulo: {
+    fontWeight: "bold",
+    fontSize: "18px",
+  },
+
+  texto: {
+    margin: "8px 0",
+  },
+};
+
+export default function Atv04TratarErrosDeMuitos(){
+  const[comentarios, setComentarios] = useState([])
+
+    function carregarComentario(){
+      fetch("https://jsonplaceholder.typicode.com/comments")
+      .then((response) => {
+        if(!response.ok){
+          throw new Error(`Erro na requisição! Status: ${response.status}`);
+        }
+        
+        return response.json();
+      })
+      .then((dados) => {
+        setComentarios(dados);
+      })
+      .catch((erro) => {
+        console.log("Erro:", erro)
+      })
+    }
+
+    return (<>
+    <div style={estilo.container}>
+      <div>
+        <button style={estilo.botao} onClick={carregarComentario}>
+          <p style={estilo.textoBotao}>
+            Clique abaixo para carregar uma atividade
+          </p>
+        </button>
+      </div>
+
+      {comentarios.length > 0 && (
+        <div>
+           {comentarios.map((comentario) => (
+                <div key={comentario.id} style={estilo.resultado}>
+                    <p style={estilo.titulo}>
+                        {comentario.postId}: {comentario.id} - {comentario.email}
+                    </p>
+
+                    <p style={estilo.texto}>
+                        {comentario.name}
+                    </p>
+
+                    <p style={estilo.texto}>
+                        {comentario.body}
+                    </p>
+                </div>
+            ))}
+        </div>
+      )}
+    </div>
+    </>)
+
+}
