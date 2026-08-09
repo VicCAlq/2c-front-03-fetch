@@ -28,6 +28,36 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import { useState } from "react";
+
+const estilo = {
+  atividade: {
+    backgroundColor: "rgba(32, 116, 40, 1)",
+    padding: "10px",
+    borderRadius: "10px",
+    margin: "20px",
+  },
+  textoBotao: {
+    color: "#eee",
+    fontSize: "16px",
+  },
+  botao: {
+    borderRadius: "5px",
+    backgroundColor: "#505560",
+    padding: "10px",
+    margin: "10px",
+    border: "none",
+    cursor: "pointer",
+  },
+  resultado: {
+    margin: "10px",
+    padding: "5px",
+    backgroundColor: "#a89",
+    borderRadius: "5px",
+  },
+};
+
 import { useState } from "react";
 
 const estilo = {
@@ -96,3 +126,4 @@ export default function Atv04TratarErrosDeMuitos() {
     {itens}
   </div>)
 }
+
