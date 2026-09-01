@@ -28,3 +28,34 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+export default function Atv04TratarErrosDeMuitos() {
+  function handleClick() {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro na requisição');
+        }
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById('comments').innerHTML = data.map(comment => `
+          <div>
+            <p>${comment.postId}: ${comment.id} - ${comment.email}</p>
+            <p>${comment.name}</p>
+            <p>${comment.body}</p>
+          </div>
+        `).join('');
+      })
+      .catch(error => console.log(error));
+  }
+
+  return (
+    <div>
+      <button onClick={handleClick}>
+        Clique abaixo para carregar uma atividade
+      </button>
+
+      <div id="comments"></div>
+    </div>
+  );
+}
