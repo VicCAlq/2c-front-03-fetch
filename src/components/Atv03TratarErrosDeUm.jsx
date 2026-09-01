@@ -29,28 +29,31 @@
   */
 
 export default function Atv03TratarErrosDeUm() {
-  return (
-    <div>
-      <button onClick={handleClick}>Clique abaixo para carregar uma atividade</button>
-      <div id="comment"></div>
-    </div>
-  );
-  
   function handleClick() {
     fetch('https://jsonplaceholder.typicode.com/comments/20')
-
       .then(response => {
         if (!response.ok) {
           throw new Error('Erro na requisição');
         }
         return response.json();
-      }).then(data => {
-        const commentDiv = document.getElementById('comment');
-        commentDiv.innerHTML = `
-          <p>${data.postId}: ${data.id} - ${data.email}</p>'
+      })
+      .then(data => {
+        document.getElementById('comment').innerHTML = `
+          <p>${data.postId}: ${data.id} - ${data.email}</p>
           <p>${data.name}</p>
           <p>${data.body}</p>
         `;
-      }).catch(error => console.error('Erro ao carregar a atividade:', error));
+      })
+      .catch(error => console.log(error));
   }
+
+  return (
+    <div>
+      <button onClick={handleClick}>
+        Clique abaixo para carregar uma atividade
+      </button>
+
+      <div id="comment"></div>
+    </div>
+  );
 }
