@@ -46,7 +46,7 @@ export default function Exemplo02Tratamento() {
 
       setResultado(usuario)
     })
-    .catch((erro) => {
+    .catch((error) => {
       console.log("Erro: ", error)
     })
   }
